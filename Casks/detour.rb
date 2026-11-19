@@ -13,6 +13,7 @@ cask "detour" do
   end
 
   auto_updates true
+  depends_on :macos
 
   app "Detour.app"
   binary "#{appdir}/Detour.app/Contents/MacOS/detour"
