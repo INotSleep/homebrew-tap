@@ -1,0 +1,28 @@
+# Checks the casks the way users get them: audit, install, run, uninstall.
+name: Test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  cask:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tap this checkout
+        run: |
+          mkdir -p "$(brew --repository)/Library/Taps/inotsleep"
+          ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/inotsleep/homebrew-tap"
+      - name: Style
+        run: brew style --cask inotsleep/tap/detour
+      - name: Audit
+        run: brew audit --cask --strict --online inotsleep/tap/detour
+      - name: Install
+        run: brew install --cask inotsleep/tap/detour
+      - name: Run
+        run: |
+          detour --version
+          test -d /Applications/Detour.app
+      - name: Uninstall
+        run: brew uninstall --cask detour
