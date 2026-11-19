@@ -16,10 +16,12 @@ jobs:
           ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/inotsleep/homebrew-tap"
       - name: Style
         run: brew style --cask inotsleep/tap/detour
-      - name: Audit
-        run: brew audit --cask --strict --online inotsleep/tap/detour
       - name: Install
         run: brew install --cask inotsleep/tap/detour
+      - name: Audit
+        run: |
+          brew trust inotsleep/tap
+          brew audit --cask --strict --online inotsleep/tap/detour
       - name: Run
         run: |
           detour --version
