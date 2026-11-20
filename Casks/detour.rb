@@ -5,7 +5,7 @@ cask "detour" do
   url "https://github.com/INotSleep/Detour/releases/download/v#{version}/Detour_#{version}_universal.dmg"
   name "Detour"
   desc "SSH client with end-to-end encrypted sync and teams"
-  homepage "https://detourssh.com"
+  homepage "https://detourssh.com/"
 
   livecheck do
     url :url
