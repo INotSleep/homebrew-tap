@@ -8,6 +8,9 @@ on:
 jobs:
   cask:
     runs-on: macos-latest
+    env:
+      # brew audit --online asks the GitHub API; anonymous runners hit its limit.
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - name: Tap this checkout
